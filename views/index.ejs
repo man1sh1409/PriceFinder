@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>priceFinder</title>
+    <style>
+      #btn{ 
+      cursor: pointer;
+      padding: 5px;
+      background-color: #291f1f;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+    div{
+      display: block;
+      margin: auto;
+      width: 445px;
+      height: 200px;
+      padding-top: 60px;
+      background-color: burlywood;
+      border-radius: 5px;
+    }
+    input[type='text']{
+      padding: 7px;
+      border: 2px solid black;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    label[for='mname']{
+      font-weight: 800;
+     font-size: 20px;
+    }
+    h1{
+        text-align: center;
+        text-transform: capitalize;
+        color: deepskyblue;
+        font-size: 3rem;
+        margin-top: 0px;
+        margin-bottom: 0px;
+     }
+     h6{
+        text-align: center;
+        font-size: 16px;
+        color: blue;
+        margin-top: 0px;
+     }
+    </style>
+  </head>
+  <body>
+    <h1>welcome to PriceFinder</h1>
+    <h6>where you can know minimum price of mobile phone</h6>
+    <div>
+      <form action="">
+        <label for="mname">Mobile Name <input type="text" id="mobname" /></label>
+        <button id="btn">search</button>
+      </form>
+      <h2></h2>
+    </div>
+    
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    let btn = document.querySelector("button");
+    btn.addEventListener("click",  async(e) => {
+      let mobileName = document.querySelector("input[type='text']").value;
+      //console.log(mobileName);
+      e.preventDefault();
+      axios.post('/', {
+        mobileName:mobileName
+      })
+      .then(function (res) {
+        console.log(res);
+        console.log(res.data.price);
+        let elem=document.querySelector('h2');
+        elem.innerHTML=`minimum price is ${res.data.price} and website is ${res.data.link}`;
+         
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      
+    })
+  </script>
+</html>
