@@ -1,4 +1,5 @@
 const express=require('express');
+const bodyParser = require('body-parser')
 const app=express();
 app.use(express.json());
 const path= require("path"); 
@@ -15,15 +16,19 @@ let minmPrice=Infinity;
 let renderLink='#';
 let bobj;
 const port=8000;
-
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
 app.get('/',(req,res)=>{
     //res.sendFile('/public/index.html',{root:__dirname});
     res.render('index.ejs');
+    
 
 })
 app.post('/',async(req,res)=>{
+    //console.log(req.body);
     let mobilename=req.body.mobileName;
-    await  getPriceFromFlipkart(mobilename);
+    console.log(mobilename);
+    await getPriceFromFlipkart(mobilename);
     result.forEach(element => {
         if(Number(element.price) < minmPrice){
             minmPrice=element.price;
@@ -31,14 +36,16 @@ app.post('/',async(req,res)=>{
         }
         
     });
-    console.log(`minimum price is ${minmPrice} and link is ${renderLink}`);
-    res.json({
-        status:'success',
-        statusCode:200,
-        price:minmPrice,
-        link:renderLink
-    });
-    bobj.close({delay:4000});
+    // console.log(`minimum price is ${minmPrice} and link is ${renderLink}`);
+    // res.json({
+    //     status:'success',
+    //     statusCode:200,
+    //     price:minmPrice,
+    //     link:renderLink
+    // });
+
+    res.render('new.ejs',{price:minmPrice,link:renderLink});
+    //bobj.close({delay:4000});
 })
 
 
@@ -46,9 +53,9 @@ async  function getPriceFromFlipkart(name){
      try {
           bobj=await puppeteer.launch(
         //     {
-            // headless:false,
-            // defaultViewport:null,
-            // args:['--start-maximized']
+        //     headless:false,
+        //     defaultViewport:null,
+        //     args:['--start-maximized']
         //    }
         );
         const newpage=await bobj.newPage();

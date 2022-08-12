@@ -47,21 +47,25 @@
         color: blue;
         margin-top: 0px;
      }
+     
     </style>
   </head>
   <body>
     <h1>welcome to PriceFinder</h1>
     <h6>where you can know minimum price of mobile phone</h6>
     <div>
-      <form action="">
-        <label for="mname">Mobile Name <input type="text" id="mobname" /></label>
-        <button id="btn">search</button>
+      <form action="/" method="post">
+        <label for="mname">Mobile Name 
+          <input type="text" id="mobname" name="mobileName"/>
+        </label>
+        <button id="btn" type="submit">search</button>
       </form>
-      <h2></h2>
+      <h6 id="dis" >hold for 3,4seconds</h6>
     </div>
     
   </body>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  
+  <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
     let btn = document.querySelector("button");
     btn.addEventListener("click",  async(e) => {
@@ -83,5 +87,5 @@
       });
       
     })
-  </script>
+  </script> -->
 </html>
