@@ -45,7 +45,7 @@ app.post('/',async(req,res)=>{
     // });
 
     res.render('new.ejs',{price:minmPrice,link:renderLink});
-    //bobj.close({delay:4000});
+    bobj.close({delay:6000});
 })
 
 
