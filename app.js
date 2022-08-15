@@ -15,7 +15,7 @@ const result=[];
 let minmPrice=Infinity;
 let renderLink='#';
 let bobj;
-const port=8000;
+const port=process.env.PORT||8000;
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.get('/',(req,res)=>{
